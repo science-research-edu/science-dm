@@ -4,34 +4,39 @@
     <title>Google Docs - Science Notes</title>
     <link rel="icon" href="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico">
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #fff; font-family: sans-serif; }
-        #play-btn { 
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            padding: 15px 30px; font-size: 20px; cursor: pointer; background: #1a73e8;
-            color: white; border: none; border-radius: 4px; z-index: 10;
-        }
+        body, html { margin:0; padding:0; height:100%; overflow:hidden; background:#fff; font-family: sans-serif; }
+        .wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        .doc-button { padding: 12px 24px; background: #1a73e8; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; }
     </style>
 </head>
 <body>
-    <div id="game-container" data-src="https://your-worker-url.workers.dev/proxy">
-        <button id="play-btn" onclick="loadGame()">Open Document</button>
+    <div class="wrapper" id="main-view">
+        <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" width="64" style="margin-bottom: 20px;">
+        <button class="doc-button" id="launcher" data-link="https://your-worker-name.your-subdomain.workers.dev">
+            Open "Science Notes.docx"
+        </button>
     </div>
 
     <script>
-        function loadGame() {
-            const container = document.getElementById('game-container');
-            const target = container.getAttribute('data-src');
+        document.getElementById('launcher').addEventListener('click', function() {
+            const workerUrl = this.getAttribute('data-link');
             
-            // The "Working Site" trick: Create an iframe dynamically
+            // Replicating the "Working Site" method:
+            // 1. Clear the screen to look like a page transition
+            const container = document.getElementById('main-view');
+            container.innerHTML = "Loading document...";
+
+            // 2. Inject the iframe only after the click
             const frame = document.createElement('iframe');
-            frame.src = target;
+            frame.src = workerUrl;
             frame.style.width = "100%";
             frame.style.height = "100vh";
             frame.style.border = "none";
+            frame.setAttribute('allow', 'autoplay;fullscreen;keyboard');
             
-            container.innerHTML = ''; // Clear the button
-            container.appendChild(frame);
-        }
+            document.body.innerHTML = ''; 
+            document.body.appendChild(frame);
+        });
     </script>
 </body>
 </html>
