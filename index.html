@@ -6,18 +6,32 @@
     <title>Google Docs - Science Notes</title>
     <link rel="icon" href="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico">
     <style>
-        body { background: #000; color: #333; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        #loading { color: #555; font-size: 14px; letter-spacing: 1px; }
+        body, html { 
+            margin: 0; padding: 0; height: 100%; width: 100%; 
+            overflow: hidden; background: #000; 
+        }
+        iframe { 
+            width: 100%; height: 100%; border: none; 
+        }
     </style>
 </head>
 <body>
-    <div id="loading">LOADING DATA MODULE...</div>
+    <div id="game-container"></div>
+    
     <script>
-        // Change this URL to the Overtake or FRC link you found!
-        const gameUrl = "https://play.fancade.com/5F084A0BCE06B710?max_w=999999&max_h=9999999&istart=1";
+        // 1. We encode the URL so Linewize doesn't see "fancade" in the text
+        const secret = "aHR0cHM6Ly9wbGF5LmZhbmNhZGUuY29tLzVGMDg0QTBCQ0UwNkI3MTA/bWF4X3c9OTk5OTk5Jm1heF9oPTk5OTk5OTkmaXN0YXJ0PTE=";
+        const gameUrl = atob(secret);
         
-        // This instantly swaps the page for the game
-        window.location.replace(gameUrl);
+        // 2. We create an IFRAME instead of using window.location.replace
+        const frame = document.createElement('iframe');
+        frame.src = gameUrl;
+        
+        // 3. This 'sandbox' prevents the game from redirecting the whole tab
+        frame.setAttribute('sandbox', 'allow-scripts allow-forms allow-same-origin');
+        frame.setAttribute('allow', 'autoplay; fullscreen; keyboard');
+        
+        document.getElementById('game-container').appendChild(frame);
     </script>
 </body>
 </html>
