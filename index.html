@@ -1,51 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Google Docs - Science Research Notes</title>
+    <title>Google Docs - Science Research</title>
     <style>
-        body, html { margin:0; padding:0; height:100%; overflow:hidden; background:#f8f9fa; font-family: 'Arial', sans-serif; }
-        .header { background: #fff; border-bottom: 1px solid #dfe1e5; padding: 10px 20px; display: flex; align-items: center; }
-        .doc-icon { color: #1a73e8; font-weight: bold; font-size: 24px; margin-right: 15px; }
-        .container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 80vh; }
-        .btn { padding: 12px 24px; background: #1a73e8; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
-        .btn:hover { background: #1557b0; }
-        #app-root { width: 100%; height: 100%; }
+        body, html { margin:0; padding:0; height:100%; overflow:hidden; background:#fff; font-family: sans-serif; }
+        .btn-container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        .btn { padding: 15px 30px; background: #1a73e8; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 18px; }
     </style>
 </head>
 <body>
-    <div id="ui-overlay">
-        <div class="header">
-            <span class="doc-icon">目</span>
-            <span style="color: #5f6368;">Science Project - Detailed Notes v4.2</span>
-        </div>
-        <div class="container">
-            <p style="color: #3c4043; margin-bottom: 20px;">Review the interactive 3D modeling document below.</p>
-            <button class="btn" onclick="launchDocument()">Open Research Viewer</button>
-        </div>
+    <div id="setup" class="btn-container">
+        <h2 style="color: #5f6368;">Science Project Notes</h2>
+        <button class="btn" onclick="run()">Open Document Viewer</button>
     </div>
-    <div id="app-root"></div>
 
     <script>
-        function launchDocument() {
-            // Obfuscated URL to prevent simple text-scanning of your GitHub code
-            const part1 = "https://fancy-mud-6c62.";
-            const part2 = "ek2012mayday.workers.dev/proxy";
-            const target = part1 + part2;
-
-            const root = document.getElementById('app-root');
-            const overlay = document.getElementById('ui-overlay');
+        function run() {
+            const workerUrl = "https://fancy-mud-6c62.ek2012mayday.workers.dev/proxy";
+            const container = document.getElementById('setup');
             
             const frame = document.createElement('iframe');
-            frame.src = target;
+            frame.src = workerUrl;
             frame.style.width = "100%";
             frame.style.height = "100vh";
             frame.style.border = "none";
-            // Important for games: allows keyboard and full screen
-            frame.allow = "autoplay; fullscreen; keyboard; gamepad"; 
+            // Valid feature policy list
+            frame.allow = "autoplay; fullscreen; gamepad"; 
             
-            overlay.style.display = 'none';
-            root.appendChild(frame);
+            container.innerHTML = '';
+            document.body.appendChild(frame);
         }
     </script>
 </body>
