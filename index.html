@@ -2,37 +2,24 @@
 <html>
 <head>
     <title>Google Docs - Science Notes</title>
-    <link rel="icon" href="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico">
     <style>
-        body, html { margin:0; padding:0; height:100%; overflow:hidden; background:#fff; font-family: sans-serif; }
-        .wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        .doc-button { padding: 12px 24px; background: #1a73e8; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; }
+        body, html { margin:0; padding:0; height:100%; overflow:hidden; background:#fff; }
+        .btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 15px; background: #1a73e8; color: white; border: none; cursor: pointer; }
     </style>
 </head>
 <body>
-    <div class="wrapper" id="main-view">
-        <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" width="64" style="margin-bottom: 20px;">
-        <button class="doc-button" id="launcher" data-link="https://fancy-mud-6c62.ek2012mayday.workers.dev/proxy">
-            Open "Science Notes.docx"
-        </button>
-    </div>
-
+    <button class="btn" onclick="start()">Open Science Document</button>
     <script>
-        document.getElementById('launcher').addEventListener('click', function() {
-            const workerUrl = this.getAttribute('data-link');
-            const container = document.getElementById('main-view');
-            container.innerHTML = "Loading document...";
-
+        function start() {
             const frame = document.createElement('iframe');
-            frame.src = workerUrl;
+            // USE YOUR WORKER URL HERE
+            frame.src = "https://fancy-mud-6c62.ek2012mayday.workers.dev/proxy";
             frame.style.width = "100%";
             frame.style.height = "100vh";
             frame.style.border = "none";
-            frame.setAttribute('allow', 'autoplay;fullscreen;keyboard');
-            
-            document.body.innerHTML = ''; 
+            document.body.innerHTML = '';
             document.body.appendChild(frame);
-        });
+        }
     </script>
 </body>
 </html>
