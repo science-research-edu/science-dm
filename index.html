@@ -3,27 +3,35 @@
 <head>
     <title>Google Docs - Science Notes</title>
     <link rel="icon" href="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico">
-    <style>body,html{margin:0;padding:0;height:100%;overflow:hidden;background:#fff;}</style>
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #fff; font-family: sans-serif; }
+        #play-btn { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            padding: 15px 30px; font-size: 20px; cursor: pointer; background: #1a73e8;
+            color: white; border: none; border-radius: 4px; z-index: 10;
+        }
+    </style>
 </head>
 <body>
-    <div id="container"></div>
+    <div id="game-container" data-src="https://your-worker-url.workers.dev/proxy">
+        <button id="play-btn" onclick="loadGame()">Open Document</button>
+    </div>
+
     <script>
-        // This is the Fancade URL scrambled so the filter can't read it
-        const _0x4a2 = "aHR0cHM6Ly9wbGF5LmZhbmNhZGUuY29tLzVGMDg0QTBCQ0UwNkI3MTA/bWF4X3c9OTk5OTk5Jm1heF9oPTk5OTk5OTkmaXN0YXJ0PTE=";
-        const target = atob(_0x4a2);
-
-        // We create a 'Blob' which is a virtual file that doesn't have a URL
-        const html = `<html><body style='margin:0'><iframe src="${target}" style='width:100%;height:100vh;border:none;' allow='autoplay;fullscreen;keyboard'></iframe></body></html>`;
-        const blob = new Blob([html], {type: 'text/html'});
-        const blobUrl = URL.createObjectURL(blob);
-
-        // Load the blob into an iframe
-        const frame = document.createElement('iframe');
-        frame.src = blobUrl;
-        frame.style.width = "100%";
-        frame.style.height = "100vh";
-        frame.style.border = "none";
-        document.getElementById('container').appendChild(frame);
+        function loadGame() {
+            const container = document.getElementById('game-container');
+            const target = container.getAttribute('data-src');
+            
+            // The "Working Site" trick: Create an iframe dynamically
+            const frame = document.createElement('iframe');
+            frame.src = target;
+            frame.style.width = "100%";
+            frame.style.height = "100vh";
+            frame.style.border = "none";
+            
+            container.innerHTML = ''; // Clear the button
+            container.appendChild(frame);
+        }
     </script>
 </body>
 </html>
