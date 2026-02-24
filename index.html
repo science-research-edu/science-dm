@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Google Docs - Science Notes</title>
+    <title>Google Docs - Science Research</title>
     <style>
         body, html { margin:0; padding:0; height:100vh; overflow:hidden; background:#fff; }
-        #boot-screen { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; font-family:sans-serif; }
+        .gate { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; font-family:sans-serif; }
         .btn { padding:15px 30px; background:#1a73e8; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:16px; }
     </style>
 </head>
 <body>
-    <div id="boot-screen">
-        <h2 style="color:#5f6368">Internal Science Research Document</h2>
-        <button class="btn" onclick="loadGame()">View Interactive Model</button>
+    <div id="ui" class="gate">
+        <h2 style="color:#5f6368">3D Physics Simulation Environment</h2>
+        <button class="btn" onclick="run()">Initialize Simulation</button>
     </div>
 
     <script>
-        function loadGame() {
-            const workerDomain = "fancy-mud-6c62.ek2012mayday.workers.dev";
+        function run() {
+            const worker = "https://fancy-mud-6c62.ek2012mayday.workers.dev/proxy";
             const frame = document.createElement('iframe');
-            
-            // We point to /proxy to start the chain
-            frame.src = "https://" + workerDomain + "/proxy";
+            frame.src = worker;
             frame.style.width = "100vw";
             frame.style.height = "100vh";
             frame.style.border = "none";
             
-            // Security bypass: allows the frame to behave like a top-level site
-            frame.allow = "autoplay; fullscreen; gamepad; cross-origin-isolated";
+            // Sandbox is the key to stopping "SecurityError" 
+            // but we must allow scripts and same-origin for the game to run.
+            frame.allow = "autoplay; fullscreen; gamepad";
             
-            document.getElementById('boot-screen').remove();
+            document.getElementById('ui').remove();
             document.body.appendChild(frame);
         }
     </script>
