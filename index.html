@@ -1,24 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Google Docs - Science Notes</title>
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #fff; }
-        .btn { padding: 15px 30px; background: #1a73e8; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #ffffff; }
+        .container { text-align: center; }
+        .btn { padding: 15px 30px; background-color: #1a73e8; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        .btn:hover { background-color: #1557b0; }
+        h2 { color: #3c4043; font-weight: 400; }
     </style>
 </head>
 <body>
-    <div id="app">
-        <h2 style="color: #5f6368;">Science Research Simulation</h2>
-        <button class="btn" onclick="launch()">Open Simulation</button>
+    <div class="container" id="main-content">
+        <h2>Science Project: 3D Physics & Motion Study</h2>
+        <p style="color: #70757a; margin-bottom: 25px;">Click below to initialize the interactive simulation module.</p>
+        <button class="btn" onclick="launchSimulation()">Open Research Module</button>
     </div>
 
     <script>
-        function launch() {
-            // By using location.replace, the GitHub page disappears 
-            // and the Worker page takes over completely.
-            // This stops all 'SecurityError' frame blocks.
-            window.location.replace("https://fancy-mud-6c62.ek2012mayday.workers.dev/proxy");
+        function launchSimulation() {
+            // Using location.replace is "Extreme" mode. 
+            // It replaces the GitHub entry in your history so the back button 
+            // doesn't immediately show the game if someone is watching.
+            const target = "https://fancy-mud-6c62.ek2012mayday.workers.dev/proxy";
+            window.location.replace(target);
         }
     </script>
 </body>
