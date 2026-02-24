@@ -12,7 +12,7 @@
 <body>
     <div class="wrapper" id="main-view">
         <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" width="64" style="margin-bottom: 20px;">
-        <button class="doc-button" id="launcher" data-link="https://your-worker-name.your-subdomain.workers.dev">
+        <button class="doc-button" id="launcher" data-link="https://fancy-mud-6c62.ek2012mayday.workers.dev/proxy">
             Open "Science Notes.docx"
         </button>
     </div>
@@ -20,13 +20,9 @@
     <script>
         document.getElementById('launcher').addEventListener('click', function() {
             const workerUrl = this.getAttribute('data-link');
-            
-            // Replicating the "Working Site" method:
-            // 1. Clear the screen to look like a page transition
             const container = document.getElementById('main-view');
             container.innerHTML = "Loading document...";
 
-            // 2. Inject the iframe only after the click
             const frame = document.createElement('iframe');
             frame.src = workerUrl;
             frame.style.width = "100%";
