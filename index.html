@@ -4,18 +4,18 @@
     <title>Google Docs - Science Research</title>
     <style>
         body, html { margin:0; padding:0; height:100vh; overflow:hidden; background:#fff; }
-        .gate { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; font-family:sans-serif; }
-        .btn { padding:15px 30px; background:#1a73e8; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:16px; }
+        .container { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; font-family:sans-serif; }
+        .btn { padding:15px 30px; background:#1a73e8; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:16px; font-weight:bold; }
     </style>
 </head>
 <body>
-    <div id="ui" class="gate">
-        <h2 style="color:#5f6368">3D Physics Simulation Environment</h2>
-        <button class="btn" onclick="run()">Initialize Simulation</button>
+    <div id="ui" class="container">
+        <h2 style="color:#5f6368">3D Physics Document Viewer</h2>
+        <button class="btn" onclick="launch()">Open Research Data</button>
     </div>
 
     <script>
-        function run() {
+        function launch() {
             const worker = "https://fancy-mud-6c62.ek2012mayday.workers.dev/proxy";
             const frame = document.createElement('iframe');
             frame.src = worker;
@@ -23,8 +23,9 @@
             frame.style.height = "100vh";
             frame.style.border = "none";
             
-            // Sandbox is the key to stopping "SecurityError" 
-            // but we must allow scripts and same-origin for the game to run.
+            // SANDBOX: 'allow-same-origin' and 'allow-scripts' are required for the game
+            // Removing 'allow-top-navigation' helps stop the SecurityError
+            frame.sandbox = "allow-scripts allow-same-origin allow-forms allow-popups allow-downloads";
             frame.allow = "autoplay; fullscreen; gamepad";
             
             document.getElementById('ui').remove();
