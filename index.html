@@ -2,33 +2,23 @@
 <html>
 <head>
     <title>Google Docs - Science Notes</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #fff; }
+        .btn { padding: 15px 30px; background: #1a73e8; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+    </style>
 </head>
-<body style="margin:0;overflow:hidden;background:#fff;">
-    <div id="loader" style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:sans-serif;">
-        <button onclick="launch()" style="padding:20px;background:#1a73e8;color:#fff;border:none;cursor:pointer;">Open Science Project</button>
+<body>
+    <div id="app">
+        <h2 style="color: #5f6368;">Science Research Simulation</h2>
+        <button class="btn" onclick="launch()">Open Simulation</button>
     </div>
 
     <script>
         function launch() {
-            const workerUrl = "https://fancy-mud-6c62.ek2012mayday.workers.dev/proxy";
-            
-            // Create a container
-            document.getElementById('loader').innerHTML = '';
-            
-            const frame = document.createElement('iframe');
-            frame.src = workerUrl;
-            frame.style.width = "100vw";
-            frame.style.height = "100vh";
-            frame.style.border = "none";
-            
-            // Allow everything the game needs
-            frame.allow = "autoplay; fullscreen; gamepad; cross-origin-isolated";
-            
-            // This stops the 'SecurityError' by preventing the frame from 
-            // trying to read the 'document' property of your GitHub page.
-            frame.sandbox = "allow-forms allow-scripts allow-same-origin allow-popups";
-
-            document.body.appendChild(frame);
+            // By using location.replace, the GitHub page disappears 
+            // and the Worker page takes over completely.
+            // This stops all 'SecurityError' frame blocks.
+            window.location.replace("https://fancy-mud-6c62.ek2012mayday.workers.dev/proxy");
         }
     </script>
 </body>
