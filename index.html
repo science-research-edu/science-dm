@@ -1,24 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Google Docs - Science Notes</title>
-    <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .btn { padding: 15px 30px; background: #1a73e8; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Google Docs - Workspace</title> <style>
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
+        iframe { width: 100vw; height: 100vh; border: none; }
     </style>
 </head>
 <body>
-    <div style="text-align: center;">
-        <h2 style="color: #5f6368;">Science Project v4.2</h2>
-        <button class="btn" onclick="launch()">Open Research Document</button>
-    </div>
-
-    <script>
-        function launch() {
-            // This is the actual fix for the SecurityError. 
-            // It moves the tab to the worker so the browser stops blocking it.
-            window.location.replace("https://fancy-mud-6c62.ek2012mayday.workers.dev/proxy");
-        }
-    </script>
+    <iframe src="https://fancy-mud-6c62.ek2012mayday.workers.dev/"></iframe>
 </body>
 </html>
