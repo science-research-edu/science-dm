@@ -3,20 +3,32 @@
 <head>
     <title>Google Docs - Science Notes</title>
     <style>
-        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #fff; }
-        .btn { padding: 15px 30px; background: #1a73e8; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; }
-        h2 { color: #5f6368; font-weight: 400; }
+        body, html { margin:0; padding:0; height:100%; overflow:hidden; background:#fff; font-family: sans-serif; }
+        .container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        .doc-icon { width: 64px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
-    <h2>Science Project: Interactive Physics</h2>
-    <button class="btn" onclick="start()">Initialize Research Module</button>
+    <div class="container" id="main">
+        <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" class="doc-icon">
+        <button onclick="launch()" style="padding:10px 20px; cursor:pointer; border:1px solid #ccc; background:#f1f3f4;">Open Research Document</button>
+    </div>
 
     <script>
-        function start() {
-            // This replaces the current page with the worker.
-            // This is the only way to kill that 'SecurityError' for good.
-            window.location.replace("https://fancy-mud-6c62.ek2012mayday.workers.dev/proxy");
+        function launch() {
+            // Replace with your actual Worker URL
+            const workerUrl = "https://your-worker-name.workers.dev/proxy";
+            
+            // Create a fullscreen iframe to the worker
+            const frame = document.createElement('iframe');
+            frame.src = workerUrl;
+            frame.style.width = "100vw";
+            frame.style.height = "100vh";
+            frame.style.border = "none";
+            frame.allow = "autoplay; fullscreen; keyboard";
+            
+            document.getElementById('main').innerHTML = '';
+            document.body.appendChild(frame);
         }
     </script>
 </body>
