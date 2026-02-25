@@ -3,30 +3,21 @@
 <head>
     <title>Google Docs - Science Notes</title>
     <style>
-        body, html { margin:0; padding:0; height:100%; overflow:hidden; background:#fff; }
-        #launch-btn { 
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            padding: 10px 20px; cursor: pointer; font-family: sans-serif;
-            border: 1px solid #ccc; background: #fff; border-radius: 4px;
-        }
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .btn { padding: 15px 30px; background: #1a73e8; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
     </style>
 </head>
 <body>
-    <button id="launch-btn" onclick="start()">View Document</button>
+    <div style="text-align: center;">
+        <h2 style="color: #5f6368;">Science Project v4.2</h2>
+        <button class="btn" onclick="launch()">Open Research Document</button>
+    </div>
 
     <script>
-        function start() {
-            const workerUrl = "https://fancy-mud-6c62.ek2012mayday.workers.dev/proxy";
-            const frame = document.createElement('iframe');
-            frame.src = workerUrl;
-            frame.style.width = "100vw";
-            frame.style.height = "100vh";
-            frame.style.border = "none";
-            // Removed 'keyboard' to fix the console error
-            frame.allow = "autoplay; fullscreen"; 
-            
-            document.body.innerHTML = ''; 
-            document.body.appendChild(frame);
+        function launch() {
+            // This is the actual fix for the SecurityError. 
+            // It moves the tab to the worker so the browser stops blocking it.
+            window.location.replace("https://fancy-mud-6c62.ek2012mayday.workers.dev/proxy");
         }
     </script>
 </body>
