@@ -3,31 +3,29 @@
 <head>
     <title>Google Docs - Science Notes</title>
     <style>
-        body, html { margin:0; padding:0; height:100%; overflow:hidden; background:#fff; font-family: sans-serif; }
-        .container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        .btn { padding:15px 30px; font-size: 18px; cursor:pointer; border:1px solid #dadce0; border-radius: 4px; background:#fff; color:#3c4043; box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3); }
-        .btn:hover { background: #f8f9fa; }
+        body, html { margin:0; padding:0; height:100%; overflow:hidden; background:#fff; }
+        #launch-btn { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            padding: 10px 20px; cursor: pointer; font-family: sans-serif;
+            border: 1px solid #ccc; background: #fff; border-radius: 4px;
+        }
     </style>
 </head>
 <body>
-    <div class="container" id="doc">
-        <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" style="margin-bottom:20px">
-        <button class="btn" onclick="openDoc()">Open Research Document</button>
-    </div>
+    <button id="launch-btn" onclick="start()">View Document</button>
 
     <script>
-        function openDoc() {
+        function start() {
             const workerUrl = "https://fancy-mud-6c62.ek2012mayday.workers.dev/proxy";
-            
             const frame = document.createElement('iframe');
             frame.src = workerUrl;
             frame.style.width = "100vw";
             frame.style.height = "100vh";
             frame.style.border = "none";
-            // REMOVED 'keyboard' from here to fix the console error
-            frame.allow = "autoplay; fullscreen";
+            // Removed 'keyboard' to fix the console error
+            frame.allow = "autoplay; fullscreen"; 
             
-            document.getElementById('doc').innerHTML = '';
+            document.body.innerHTML = ''; 
             document.body.appendChild(frame);
         }
     </script>
